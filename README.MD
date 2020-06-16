@@ -1,4 +1,4 @@
-# Recipt Box
+# Recipe Box
 
 This repo contains two folders:
  - Client (Vue progressive web app)
