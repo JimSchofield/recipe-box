@@ -1,0 +1,34 @@
+/*
+ * These stylesheets are reserved for global elements that do not output styles,
+ * e.g. @mixin, variables, etc.  If you place any scss that would normally render
+ * styles in compilation, it will be duplicated for every component in the project.
+ */
+
+/* CSS */
+// --vegas-gold: hsla(51, 62%, 75%, 1);
+// --sky-blue-crayola: hsla(191, 67%, 99%, 1);
+// --green-cyan: hsla(157, 69%, 58%, 1);
+// --snow: hsla(12, 2%, 100%, 1);
+// --russian-violet: hsla(276, 100%, 31%, 1);
+
+// /* SCSS HEX */
+// $VEGAS_GOLD: #bfae48ff;
+// $SKY_BLUE_CRAYOLA: #54defdff;
+// $GREEN_CYAN: #2d936cff;
+// $SNOW: #fffbfaff;
+// $RUSSIAN_VIOLET: #2f004fff;
+
+// /* SCSS HSL */
+// $VEGAS_GOLD: hsla(51, 62%, 75%, 1);
+// $SKY_BLUE_CRAYOLA: hsla(191, 67%, 99%, 1);
+// $GREEN_CYAN: hsla(157, 69%, 58%, 1);
+// $SNOW: hsla(12, 2%, 100%, 1);
+// $RUSSIAN_VIOLET: hsla(276, 100%, 31%, 1);
+
+/* SCSS RGB */
+$VEGAS_GOLD: rgba(191, 174, 72, 1);
+$SKY_BLUE_CRAYOLA: rgba(84, 222, 253, 1);
+$GREEN_CYAN: rgba(45, 147, 108, 1);
+$SNOW: rgba(255, 251, 250, 1);
+$RUSSIAN_VIOLET: rgba(47, 0, 79, 1);
+
