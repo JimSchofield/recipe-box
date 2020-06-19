@@ -12,20 +12,23 @@
         <li>
           <router-link to="/collections">Collections</router-link>
         </li>
-        <li>
-          <router-link to="/add">Add</router-link>
-        </li>
       </ul>
     </nav>
+
+    <hr />
+    <button @click="modalOpen">Add</button>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
-  name: "Sidebar"
+  name: "Sidebar",
+  methods: {
+    ...mapActions(["modalOpen"])
+  }
 };
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
