@@ -1,18 +1,22 @@
 const modalModule = {
   state: {
-    isOpen: true
+    isOpen: false,
+    component: null,
+    props: undefined
   },
   actions: {
-    ["modalOpen"](context) {
-      context.commit("modalOpen");
+    ["modalOpen"](context, payload) {
+      context.commit("modalOpen", payload);
     },
     ["modalClose"](context) {
       context.commit("modalClose");
     }
   },
   mutations: {
-    ["modalOpen"](state) {
+    ["modalOpen"](state, { component, props }) {
       state.isOpen = true;
+      state.component = component;
+      state.props = props;
     },
     ["modalClose"](state) {
       state.isOpen = false;
