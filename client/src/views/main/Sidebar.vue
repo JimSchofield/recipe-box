@@ -21,12 +21,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import Add from "../modal/Add.vue";
 
 export default {
   name: "Sidebar",
   methods: {
-    ...mapActions(["modalOpen"])
+    modalOpen() {
+      this.$store.dispatch("modalOpen", { component: Add });
+    },
   }
 };
 </script>

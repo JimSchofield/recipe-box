@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: "AddARecipe"
+  name: "Add"
 };
 </script>
