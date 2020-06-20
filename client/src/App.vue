@@ -1,25 +1,17 @@
 <template>
   <div id="app">
     <router-view />
-    <transition name="fade">
-      <div id="modal" v-if="modalIsOpen">
-        <p>Hey dere</p>
-        <button @click="modalClose">Close Me Please</button>
-      </div>
-    </transition>
+    <Modal />
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import Modal from "./views/Modal.vue";
 
 export default {
   name: "App",
-  computed: {
-    ...mapState({ modalIsOpen: state => state.modalModule.isOpen })
-  },
-  methods: {
-    ...mapActions(["modalClose"])
+  components: {
+    Modal
   }
 };
 </script>
