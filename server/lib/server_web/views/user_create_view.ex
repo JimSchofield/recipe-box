@@ -1,11 +1,21 @@
 defmodule RecipeBoxWeb.UserView do
   use RecipeBoxWeb, :view
 
-  def render("user.json", user) do
-    user_response = Map.drop(user.conn.body_params, ["password"])
+  def render("user.json", %{user: user}) do
     %{
       status: "OK",
-      user: user_response,
+      user: %{
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+      },
+    }
+  end
+
+  def render("error.json", %{reasons: reasons}) do
+    %{
+      status: "BAD",
+      reasons: translate_errors(reasons),
     }
   end
 end

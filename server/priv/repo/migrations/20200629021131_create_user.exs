@@ -9,5 +9,7 @@ defmodule RecipeBox.Repo.Migrations.CreateUser do
       add :password, :string
       timestamps()
     end
+
+    create unique_index(:users, [:email])
   end
 end

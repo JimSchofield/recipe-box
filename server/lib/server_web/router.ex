@@ -9,6 +9,7 @@ defmodule RecipeBoxWeb.Router do
     pipe_through :api
 
     resources "/hello", RecipeBoxHello, only: [:index]
+    post "/user", UserController, :create
   end
 
   # Enables LiveDashboard only for development

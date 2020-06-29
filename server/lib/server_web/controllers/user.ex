@@ -4,10 +4,14 @@ defmodule RecipeBoxWeb.UserController do
 
   def create(conn, params) do
     case User.create_user(params) do
-      { :ok, _rest } -> render(conn, "user.json")
-      { :error, reasons } ->
-        IO.inspect(reasons)
+      { :ok, %User{} = rest } ->
         conn
+        |> put_status(:created)
+        |> render("user.json", user: rest)
+      { :error, reasons } ->
+        conn
+        |> put_status(400)
+        |> render("error.json", reasons: reasons)
       _ -> nil
     end
   end
