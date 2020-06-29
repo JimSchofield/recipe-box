@@ -2,6 +2,6 @@ defmodule RecipeBoxWeb.RecipeBoxHelloView do
   use RecipeBoxWeb, :view
 
   def render("hello.json", _) do
-    %{ hello: "world" }
+    %{hello: "world"}
   end
 end
