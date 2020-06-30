@@ -30,8 +30,4 @@ defmodule RecipeBoxWeb.ErrorHelpers do
       Gettext.dgettext(RecipeBoxWeb.Gettext, "errors", msg, opts)
     end
   end
-
-  def translate_errors(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, &translate_error/1)
-  end
 end

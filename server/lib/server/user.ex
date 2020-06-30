@@ -3,12 +3,14 @@ defmodule RecipeBox.User do
   import Ecto.Changeset
   alias __MODULE__
   alias RecipeBox.Repo
+  alias RecipeBox.Recipes.Recipe
 
   schema "users" do
     field :first_name, :string
     field :last_name, :string
     field :email, :string
     field :password, :string
+    has_many(:recipes, Recipe, foreign_key: :author)
     timestamps()
   end
 

@@ -15,7 +15,7 @@ defmodule RecipeBoxWeb.UserView do
   def render("error.json", %{reasons: reasons}) do
     %{
       status: "BAD",
-      reasons: translate_errors(reasons),
+      reasons: Ecto.Changeset.traverse_errors(reasons, &translate_error/1)
     }
   end
 end
