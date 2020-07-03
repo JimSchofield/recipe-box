@@ -14,4 +14,8 @@ defmodule RecipeBoxWeb.RecipeView do
     %{id: recipe.id,
       title: recipe.title}
   end
+
+  def render("error.json", %{error: changeset}) do
+    Ecto.Changeset.traverse_errors(changeset, &translate_error/1)
+  end
 end

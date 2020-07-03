@@ -1,7 +1,8 @@
 defmodule RecipeBox.User do
   use Ecto.Schema
+
   import Ecto.Changeset
-  alias __MODULE__
+
   alias RecipeBox.Repo
   alias RecipeBox.Recipes.Recipe
 
@@ -10,7 +11,15 @@ defmodule RecipeBox.User do
     field :last_name, :string
     field :email, :string
     field :password, :string
-    has_many(:recipes, Recipe, foreign_key: :author)
+
+    # Because we called the field :author on the other side
+    # we have to manually specify the foreign_key: as
+    # :author_id here.
+    #
+    # By default has_many will look for the name of this table
+    # with _id post fixed. In this case :user_id
+   has_many(:recipes, Recipe, foreign_key: :author_id)
+
     timestamps()
   end
 
@@ -22,7 +31,7 @@ defmodule RecipeBox.User do
   end
 
   def create_user(attrs) do
-    %User {}
+    %__MODULE__ {}
     |> changeset(attrs)
     |> Repo.insert 
   end

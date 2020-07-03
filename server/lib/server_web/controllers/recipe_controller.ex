@@ -11,14 +11,23 @@ defmodule RecipeBoxWeb.RecipeController do
     render(conn, "index.json", recipes: recipes)
   end
 
-  def create(conn, %{"recipe" => recipe_params}) do
-    with {:ok, %Recipe{} = recipe} <- Recipes.create_recipe(recipe_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.recipe_path(conn, :show, recipe))
-      |> render("show.json", recipe: recipe)
-    end
+  def create(conn, {:ok, %Recipe{} = recipe}) do
+    conn
+    |> put_status(:created)
+    |> render("show.json", recipe: recipe)
   end
+
+  def create(conn, {:error, changeset}) do
+    conn
+    |> put_status(400)
+    |> render("error.json", error: changeset)
+  end
+
+  def create(conn, %{} = recipe_params) do
+    create(conn, Recipes.create_recipe(recipe_params))
+  end
+
+  def create(conn, _params), do: send_resp(conn, 400, "")
 
   def show(conn, %{"id" => id}) do
     recipe = Recipes.get_recipe!(id)

@@ -5,6 +5,13 @@ defmodule RecipeBox.Recipes.Recipe do
 
   schema "recipes" do
     field :title, :string
+
+    # belongs_to/2 sets the :foreign_key option to `name`_id.
+    # In this case :author_id, which relates to the field
+    # we created in the migration.
+    #
+    # This needs to match the foreign_key in the has_many/3
+    # call in the User model.
     belongs_to(:author, User)
 
     timestamps()
@@ -13,7 +20,8 @@ defmodule RecipeBox.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title])
-    |> validate_required([:title, :author])
+    |> cast(attrs, [:title, :author_id])
+    |> validate_required([:title, :author_id])
   end
+
 end

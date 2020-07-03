@@ -49,11 +49,7 @@ defmodule RecipeBox.Recipes do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_recipe(attrs \\ %{})
-  def create_recipe(%{ "recipe" => %{ "author" => author } } = attrs) when is_binary(author) do
-    create_recipe(update_in(attrs, ["recipe", "author"], &String.to_integer/1))
-  end
-  def create_recipe(%{ "recipe" => attrs}) do
+  def create_recipe(attrs \\ %{}) do
     %Recipe{}
     |> Recipe.changeset(attrs)
     |> Repo.insert()
