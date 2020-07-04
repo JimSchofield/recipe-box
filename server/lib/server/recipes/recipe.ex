@@ -3,8 +3,14 @@ defmodule RecipeBox.Recipes.Recipe do
   import Ecto.Changeset
   alias RecipeBox.User
 
+  @derive {Jason.Encoder, only: [:title, :ingredients, :instructions, :notes, :prep_time, :picture_url, :author_id]}
   schema "recipes" do
     field :title, :string
+    embeds_many :ingredients, RecipeBox.Recipes.Ingredient
+    field :instructions, { :array, :string }
+    field :notes, :string
+    field :prep_time, :string
+    field :picture_url, :string 
 
     # belongs_to/2 sets the :foreign_key option to `name`_id.
     # In this case :author_id, which relates to the field

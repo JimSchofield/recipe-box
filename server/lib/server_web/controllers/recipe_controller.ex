@@ -27,7 +27,7 @@ defmodule RecipeBoxWeb.RecipeController do
     create(conn, Recipes.create_recipe(recipe_params))
   end
 
-  def create(conn, _params), do: send_resp(conn, 400, "")
+  def create(conn, _params), do: send_resp(conn, 400, "Expected valid JSON, and we didn't get it.")
 
   def show(conn, %{"id" => id}) do
     recipe = Recipes.get_recipe!(id)

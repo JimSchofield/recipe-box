@@ -11,8 +11,8 @@ defmodule RecipeBoxWeb.RecipeView do
   end
 
   def render("recipe.json", %{recipe: recipe}) do
-    %{id: recipe.id,
-      title: recipe.title}
+    # Map.drop(recipe, [:author, :inserted_at, :updated_at])
+    recipe
   end
 
   def render("error.json", %{error: changeset}) do
