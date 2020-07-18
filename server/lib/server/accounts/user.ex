@@ -1,9 +1,8 @@
-defmodule RecipeBox.User do
+defmodule RecipeBox.Accounts.User do
   use Ecto.Schema
 
   import Ecto.Changeset
 
-  alias RecipeBox.Repo
   alias RecipeBox.Recipes.Recipe
 
   schema "users" do
@@ -18,21 +17,22 @@ defmodule RecipeBox.User do
     #
     # By default has_many will look for the name of this table
     # with _id post fixed. In this case :user_id
-   has_many(:recipes, Recipe, foreign_key: :author_id)
+    has_many(:recipes, Recipe, foreign_key: :author_id)
 
     timestamps()
   end
+
+  def put_pass_hash(%Ecto.Changeset{ valid?: true, changes: %{ password: pass } } = changeset) do
+    change(changeset, Argon2.add_hash(pass, hash_key: :password))
+  end
+  def put_pass_hash(changeset), do: changeset
 
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:first_name, :last_name, :email, :password])
     |> validate_required([:first_name, :last_name, :email, :password])
     |> unique_constraint(:email)
-  end
-
-  def create_user(attrs) do
-    %__MODULE__ {}
-    |> changeset(attrs)
-    |> Repo.insert 
+    |> validate_length(:password, min: 8)
+    |> put_pass_hash
   end
 end

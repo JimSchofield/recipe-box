@@ -1,10 +1,10 @@
 defmodule RecipeBoxWeb.UserController do
   use RecipeBoxWeb, :controller
-  alias RecipeBox.User
+  alias RecipeBox.Accounts
 
   def create(conn, params) do
-    case User.create_user(params) do
-      { :ok, %User{} = rest } ->
+    case Accounts.create_account(params) do
+      { :ok, %Accounts.User{} = rest } ->
         conn
         |> put_status(:created)
         |> render("user.json", user: rest)
