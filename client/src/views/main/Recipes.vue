@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <h1>Add a recipe!</h1>
-  </div>
+  <router-view />
 </template>
 
 <script>
 export default {
-  name: "Add"
+  name: "Recipes"
 };
 </script>

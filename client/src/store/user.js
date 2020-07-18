@@ -1,4 +1,4 @@
-import router from "../../router/index";
+import router from "../router/index";
 
 const userModule = {
   state: {

@@ -10,7 +10,8 @@ import Dashboard from "../views/main/Dashboard.vue";
 import Search from "../views/main/Search.vue";
 import Browse from "../views/main/Browse.vue";
 import Collections from "../views/main/Collections.vue";
-import Add from "../views/modal/Add.vue";
+import Recipes from "../views/main/Recipes.vue";
+import Recipe from "../views/main/Recipe.vue";
 
 Vue.use(VueRouter);
 
@@ -65,12 +66,20 @@ const routes = [
         }
       },
       {
-        path: "/add",
-        name: "Add",
-        component: Add,
-        meta: {
-          authRequired: true
-        }
+        path: "/recipes",
+        component: Recipes,
+        children: [
+          {
+            // The detail screen for a particular recipe
+            path: ":id",
+            name: "Recipe",
+            component: Recipe,
+            props: true,
+            meta: {
+              authRequired: true
+            }
+          }
+        ]
       }
     ]
   }
