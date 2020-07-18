@@ -15,4 +15,16 @@ defmodule RecipeBoxWeb.UserController do
       _ -> nil
     end
   end
+
+  def login(conn, params) do
+    case Accounts.login_user(params) do
+      { :ok, %Accounts.User{} = user } ->
+        conn
+        |> put_session(:user_id, user.id)
+        |> send_resp(200, "")
+      { :error, _reasons } ->
+        conn
+        |> send_resp(401, "Sorry, bub")
+    end
+  end
 end

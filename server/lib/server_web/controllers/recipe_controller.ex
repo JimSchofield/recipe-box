@@ -4,7 +4,10 @@ defmodule RecipeBoxWeb.RecipeController do
   alias RecipeBox.Recipes
   alias RecipeBox.Recipes.Recipe
 
+  import RecipeBoxWeb.Auth, only: [ authenticate: 2 ]
   action_fallback RecipeBoxWeb.FallbackController
+
+  plug(:authenticate when action in [ :create, :update, :delete ])
 
   def index(conn, _params) do
     recipes = Recipes.list_recipes()
