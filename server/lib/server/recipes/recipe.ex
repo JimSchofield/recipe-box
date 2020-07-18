@@ -2,8 +2,10 @@ defmodule RecipeBox.Recipes.Recipe do
   use Ecto.Schema
   import Ecto.Changeset
   alias RecipeBox.User
+  @required [:title, :author_id]
+  @optional [:ingredients, :instructions, :notes, :prep_time, :picture_url]
 
-  @derive {Jason.Encoder, only: [:title, :ingredients, :instructions, :notes, :prep_time, :picture_url, :author_id]}
+  @derive {Jason.Encoder, only: @required ++ @optional}
   schema "recipes" do
     field :title, :string
     embeds_many :ingredients, RecipeBox.Recipes.Ingredient
@@ -26,8 +28,8 @@ defmodule RecipeBox.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, [:title, :author_id])
-    |> validate_required([:title, :author_id])
+    |> cast(attrs, @required ++ @optional)
+    |> validate_required(@required)
   end
 
 end
