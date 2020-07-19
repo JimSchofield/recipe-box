@@ -28,4 +28,11 @@ defmodule RecipeBoxWeb.UserController do
         |> send_resp(401, "Sorry, bub")
     end
   end
+
+  def logout(conn, _params) do
+    conn
+    |> configure_session(drop: true)
+    |> send_resp(200, "User logged out")
+  end
+
 end
