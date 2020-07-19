@@ -4,7 +4,10 @@ defmodule RecipeBoxWeb.RecipeController do
   alias RecipeBox.Recipes
   alias RecipeBox.Recipes.Recipe
 
+  import RecipeBoxWeb.Auth, only: [ authenticate: 2 ]
   action_fallback RecipeBoxWeb.FallbackController
+
+  plug(:authenticate when action in [ :create, :update, :delete ])
 
   def index(conn, _params) do
     recipes = Recipes.list_recipes()
@@ -24,7 +27,10 @@ defmodule RecipeBoxWeb.RecipeController do
   end
 
   def create(conn, %{} = recipe_params) do
-    create(conn, Recipes.create_recipe(recipe_params))
+    recipe = recipe_params
+    |> Map.put("author_id", conn.assigns.current_user.id)
+    |> Recipes.create_recipe  
+    create(conn, recipe)
   end
 
   def create(conn, _params), do: send_resp(conn, 400, "Expected valid JSON, and we didn't get it.")

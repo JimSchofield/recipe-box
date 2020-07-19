@@ -28,7 +28,8 @@ defmodule RecipeBox.Recipes.Recipe do
   @doc false
   def changeset(recipe, attrs) do
     recipe
-    |> cast(attrs, @required ++ @optional)
+    |> cast(attrs, @required ++ @optional -- [ :ingredients ])
+    |> cast_embed(:ingredients)
     |> validate_required(@required)
   end
 
