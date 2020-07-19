@@ -12,6 +12,7 @@ defmodule RecipeBoxWeb.Router do
     pipe_through :api
 
     post "/user", UserController, :create
+    post "/user/login", UserController, :login
     post "/logout", UserController, :logout
     resources "/recipes", RecipeController, except: [:new, :edit]
   end
